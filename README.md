@@ -141,6 +141,9 @@ Embedded Workbench builds it (`firmware/EWARM/Project.eww`). Everything the devi
 the `Core/` sources; the CubeMX-generated files are only touched inside their
 `USER CODE` sections.
 
+A prebuilt image is kept in [`firmware/hex/`](firmware/hex/) — flash it over
+SWD with STM32CubeProgrammer at `0x08000000` if you only want to run the board.
+
 | Module | Job |
 |---|---|
 | `button.c` | Debounce, click-series detector, deaf/listening gate |
