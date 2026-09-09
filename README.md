@@ -49,8 +49,10 @@ The two buttons are never pressed at the same time. The rule is enforced in
 the relay driver itself — pressing one lets go of the other first — and every
 start of the cycle begins with 100 ms of neither button pressed.
 
-Both relays sit **energised** whenever the timer is idle and are *released*
-to press a button — see [why the relay contacts look inverted](#why-the-relay-contacts-look-inverted).
+Both relays rest with their coils off, so the operator's panel buttons work as
+if the timer were not there. To press a button the timer energises a relay for
+500 ms: START through a normally-open contact across the START button, STOP
+through a normally-closed contact in series with the machine's STOP circuit.
 
 After **4 hours** of continuous running the timer switches itself off and
 sounds a 15 s alarm.
@@ -114,38 +116,17 @@ Board `PCB1_main_rev1`, 24 V supply.
 |---|---|---|
 | PB0 | `BUTTON_IN` | 10 kΩ pull-up, button to GND through 1 kΩ — active low |
 | PA6 | `BUTTON_LED_ON` | 1 kΩ → CPC1014N solid-state relay → 24 V → button lamp |
-| PA7 | `START_RELAY` | 1 kΩ → CPC1014N → relay K2 — the machine's START button. Held at rest, released to press |
-| PA5 | `STOP_RELAY` | 1 kΩ → CPC1014N → relay K1 — the machine's STOP button. Held at rest, released to press |
+| PA5 | `START_RELAY` | 1 kΩ → CPC1014N → relay K1, NO contact across the machine's START button. Energised to press |
+| PA7 | `STOP_RELAY` | 1 kΩ → CPC1014N → relay K2, NC contact in series with the machine's STOP circuit. Energised to press |
 | PB3 | `BUZZER` | 1 kΩ → CPC1014N → MLT-9650 active buzzer |
 | PB7 | `DEBUG_LED` | 1 kΩ → HL1 |
 
-### Why the relay contacts look inverted
-
-On the schematic the relays are wired the "wrong" way round: the timer holds
-both of them energised the whole time it is idle, and *releases* one to press
-a button. That is on purpose.
-
-- The machine's STOP circuit runs **through** the STOP relay. With the relay
-  energised the contact is closed and the circuit is intact; releasing it
-  breaks the circuit — which is exactly what pressing STOP does. A stop circuit
-  should fail towards "stop", so the relay that carries it is held, not
-  driven.
-- The START relay carries **no** current while energised. Releasing it closes
-  its contact for 500 ms: a START press.
-
-So with the timer idle the operator's own panel buttons work through the box
-unchanged, as if it were not there; the timer only ever *lets go* of a relay
-to act. The firmware knows about this in one place, the two
-`RELAY_*_ACTIVE_LOW` flags in `relay.h`; everything above the driver speaks in
-"pressed" and "released". At power-on the pins come up low — both relays
-released — for the few microseconds until `Relay_Init()` runs, well inside
-the 1.5 ms the solid-state relays need to react.
-
-Programming connector X2 carries SWDIO, SWCLK, GND and 3V3 only — there is
-**no NRST**, so connect-under-reset is not available.
-
 ### Rev 1 errata
 
+- The START and STOP relay outputs were swapped on the connector in the
+  original rev 1 netlist. Fixed on 2026-09-09 by renaming the nets in the
+  schematic; the firmware pin labels follow (PA5 = START, PA7 = STOP). Boards
+  built from the earlier netlist need the firmware labels swapped back.
 - The 1 kΩ resistors feeding the CPC1014N inputs give ≈ 2.1 mA against a
   guaranteed turn-on of 2 mA. Works, but marginal; 330–470 Ω next revision.
 - HL1 gets ≈ 1.2 mA and is dim.

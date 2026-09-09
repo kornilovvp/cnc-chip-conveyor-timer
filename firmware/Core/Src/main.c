@@ -244,10 +244,9 @@ static void MX_GPIO_Init(void)
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
   /* USER CODE BEGIN MX_GPIO_Init_2 */
-  /* The relays are held energised at rest and released to "press" a button.
-     The lines above have just driven every output low -- both relays released,
-     both buttons pressed at once. Put them to rest here, microseconds later,
-     before the solid-state relays (1.5 ms) can react. */
+  /* Both relays rest with their coils off, which is exactly the LOW the lines
+     above have just driven. Relay_Init() only makes the driver's own state
+     match the pins from the first microsecond. */
   Relay_Init();
   /* USER CODE END MX_GPIO_Init_2 */
 }

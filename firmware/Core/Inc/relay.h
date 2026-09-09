@@ -4,26 +4,27 @@
   * @brief          : START / STOP relays with mutual exclusion
   ******************************************************************************
   * Two relays stand in for the START and STOP buttons of the machine:
-  *   START_RELAY = PA7 -> R6 1k -> solid-state relay -> K2
-  *   STOP_RELAY  = PA5 -> R5 1k -> solid-state relay -> K1
+  *   START_RELAY = PA5 -> R5 1k -> solid-state relay -> K1, normally open
+  *   STOP_RELAY  = PA7 -> R6 1k -> solid-state relay -> K2, normally closed
+  *
+  * Contacts. The START relay's NO contact sits across the machine's START
+  * button: energise the coil and START is pressed. The STOP relay's NC contact
+  * sits in series with the machine's STOP circuit: energise the coil, the
+  * circuit opens, STOP is pressed. At rest both coils are off and the timer is
+  * invisible -- the operator's own panel buttons work as if it were not there.
+  *
+  * Vocabulary: "on" means the button is PRESSED, i.e. the coil energised,
+  * i.e. the pin HIGH. The RELAY_*_ACTIVE_LOW flags exist for a board where a
+  * relay has to be driven the other way round; on rev 1 both are 0.
   *
   * The machine must never see both buttons pressed at once. That rule lives
-  * here, in the driver, not in the callers: switching one relay on forces the
-  * other one off first, whatever the caller thinks the state is.
+  * here, in the driver, not in the callers: pressing one button lets go of
+  * the other first, whatever the caller thinks the state is.
   *
-  * Vocabulary: "on" means the button is PRESSED. Physically that is the relay
-  * RELEASED. Both relays are held energised whenever the timer is idle: the
-  * STOP relay's contact passes the machine's STOP circuit, the START relay's
-  * contact keeps START open, and the operator's own panel buttons keep working
-  * through them -- the timer is invisible until it is switched on. To press a
-  * button the firmware lets go of its relay for the pulse. The RELAY_*_ACTIVE_LOW
-  * flags express that at the pin: HIGH drives the solid-state relay and holds
-  * the coil, LOW lets it go.
-  *
-  * That makes start-up delicate: CubeMX drives every output LOW the moment it
-  * becomes an output -- both relays released, both buttons "pressed" at once.
-  * Relay_Init() is therefore called from inside MX_GPIO_Init(), microseconds
-  * later, well inside the 1.5 ms the solid-state relays need to react.
+  * Reset state: CubeMX drives every output LOW the moment it becomes an
+  * output, which is exactly "at rest". Relay_Init() still runs from inside
+  * MX_GPIO_Init(), so the driver's own state matches the pins from the first
+  * microsecond.
   ******************************************************************************
   */
 
@@ -40,10 +41,10 @@ extern "C" {
 
 /* Polarity ------------------------------------------------------------------*/
 
-/* 1 = "pressed" is a LOW pin (coil released), 0 = "pressed" is a HIGH pin
-   (coil energised). Both buttons on this board are pressed by releasing. */
-#define RELAY_START_ACTIVE_LOW    1u
-#define RELAY_STOP_ACTIVE_LOW     1u
+/* 0 = "pressed" is a HIGH pin (coil energised), 1 = "pressed" is a LOW pin
+   (coil released). Rev 1: both relays are energised to press. */
+#define RELAY_START_ACTIVE_LOW    0u
+#define RELAY_STOP_ACTIVE_LOW     0u
 
 
 /* Types ---------------------------------------------------------------------*/
@@ -66,8 +67,8 @@ typedef struct
   uint32_t stop_pulses;    /* times STOP was pressed                         */
   uint32_t forced_off;     /* times the other button had to be let go first  */
 
-  uint8_t  start_on;       /* 1 = START pressed right now (coil released)    */
-  uint8_t  stop_on;        /* 1 = STOP pressed right now (coil released)     */
+  uint8_t  start_on;       /* 1 = START pressed right now (coil energised)   */
+  uint8_t  stop_on;        /* 1 = STOP pressed right now (coil energised)    */
 } rel_debug_t;
 
 
@@ -77,9 +78,9 @@ extern volatile rel_debug_t g_rel;
 /* API -----------------------------------------------------------------------*/
 
 /**
-  * @brief  Rest: neither button pressed, both coils held. Call from the
-  *         MX_GPIO_Init_2 user section, the moment the pins have become
-  *         outputs -- see the note above.
+  * @brief  Rest: neither button pressed, both coils off. Call from the
+  *         MX_GPIO_Init_2 user section, right after the pins have become
+  *         outputs.
   */
 void Relay_Init(void);
 
