@@ -39,11 +39,11 @@ stateDiagram-v2
 
 | Mode | T1 — conveyor runs | T2 — conveyor rests |
 |:---:|:---:|:---:|
-| 1 | 5 s | 5 s |
-| 2 | 10 s | 10 s |
-| 3 | 15 s | 15 s |
-| 4 | 20 s | 30 s |
-| 5 | 30 s | 60 s |
+| 1 | 15 s | 15 s |
+| 2 | 30 s | 60 s |
+| 3 | 45 s | 90 s |
+| 4 | 60 s | 120 s |
+| 5 | 60 s | 240 s |
 
 The two buttons are never pressed at the same time. The rule is enforced in
 the relay driver itself — pressing one lets go of the other first — and every

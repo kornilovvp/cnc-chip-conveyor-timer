@@ -26,12 +26,12 @@ typedef struct
 
 static const mode_time_t k_mode[SET_MODE_MAX + 1u] =
 {
-  {     0u,     0u },   /* 0: not a mode                                     */
-  {  5000u,  5000u },   /* MODE_1                                            */
-  { 10000u, 10000u },   /* MODE_2                                            */
-  { 15000u, 15000u },   /* MODE_3                                            */
-  { 20000u, 30000u },   /* MODE_4                                            */
-  { 30000u, 60000u }    /* MODE_5                                            */
+  {      0u,      0u },   /* 0: not a mode                                     */
+  {  15000u,  15000u },   /* MODE_1                                            */
+  {  30000u,  60000u },   /* MODE_2                                            */
+  {  45000u,  90000u },   /* MODE_3                                            */
+  {  60000u, 120000u },   /* MODE_4                                            */
+  {  60000u, 240000u }    /* MODE_5                                            */
 };
 
 
