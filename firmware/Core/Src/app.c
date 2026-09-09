@@ -314,7 +314,12 @@ void App_Task(void)
 
       if (s_state == APP_RUN)
       {
-        g_app.run_ms = now - s_run_t0;
+        /* Read the clock afresh: App_Start() may have just set s_run_t0, and
+           a flash erase inside a mode change holds the loop for tens of
+           milliseconds -- the `now` from the top of this function would then
+           be older than s_run_t0, the subtraction would wrap, and the 4 h
+           alarm would fire on the spot. */
+        g_app.run_ms = HAL_GetTick() - s_run_t0;
 
         if (g_app.run_ms >= APP_AUTO_OFF_MS)
         {
