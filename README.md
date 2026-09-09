@@ -165,6 +165,19 @@ the `Core/` sources; the CubeMX-generated files are only touched inside their
 A prebuilt image is kept in [`firmware/hex/`](firmware/hex/) — flash it over
 SWD with STM32CubeProgrammer at `0x08000000` if you only want to run the board.
 
+### Building
+
+1. IAR Embedded Workbench for Arm 9.1 (any 9.x should do). STM32CubeMX is only
+   needed if you change `CNC_TIMER.ioc`; the generated files are committed.
+2. Open `firmware/EWARM/Project.eww`, build. The image lands in
+   `firmware/EWARM/CNC_TIMER/Exe/CNC_TIMER.hex` (the output converter is on).
+3. Flash over SWD. X2 has no NRST line, so the debugger cannot reset the
+   board — power-cycle it instead.
+4. The shipped `.hex` was built with compiler optimisation **switched off**.
+   The project file carries CubeMX's default, High / Size; to reproduce the
+   shipped image set Project → Options → C/C++ Compiler → Optimizations →
+   Level: None before building.
+
 | Module | Job |
 |---|---|
 | `button.c` | Debounce, click-series detector, deaf/listening gate |
