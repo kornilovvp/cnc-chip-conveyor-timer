@@ -49,11 +49,8 @@ The two buttons are never pressed at the same time. The rule is enforced in
 the relay driver itself — pressing one lets go of the other first — and every
 start of the cycle begins with 100 ms of neither button pressed.
 
-Both relays sit **energised** whenever the timer is idle: the STOP relay's
-contact passes the machine's STOP circuit, the START relay's contact keeps
-START open, and the operator's own panel buttons work exactly as before — the
-timer is invisible until it is switched on. To press a button the firmware
-*releases* the relay for 500 ms.
+Both relays sit **energised** whenever the timer is idle and are *released*
+to press a button — see [why the relay contacts look inverted](#why-the-relay-contacts-look-inverted).
 
 After **4 hours** of continuous running the timer switches itself off and
 sounds a 15 s alarm.
@@ -121,6 +118,28 @@ Board `PCB1_main_rev1`, 24 V supply.
 | PA5 | `STOP_RELAY` | 1 kΩ → CPC1014N → relay K1 — the machine's STOP button. Held at rest, released to press |
 | PB3 | `BUZZER` | 1 kΩ → CPC1014N → MLT-9650 active buzzer |
 | PB7 | `DEBUG_LED` | 1 kΩ → HL1 |
+
+### Why the relay contacts look inverted
+
+On the schematic the relays are wired the "wrong" way round: the timer holds
+both of them energised the whole time it is idle, and *releases* one to press
+a button. That is on purpose.
+
+- The machine's STOP circuit runs **through** the STOP relay. With the relay
+  energised the contact is closed and the circuit is intact; releasing it
+  breaks the circuit — which is exactly what pressing STOP does. A stop circuit
+  should fail towards "stop", so the relay that carries it is held, not
+  driven.
+- The START relay carries **no** current while energised. Releasing it closes
+  its contact for 500 ms: a START press.
+
+So with the timer idle the operator's own panel buttons work through the box
+unchanged, as if it were not there; the timer only ever *lets go* of a relay
+to act. The firmware knows about this in one place, the two
+`RELAY_*_ACTIVE_LOW` flags in `relay.h`; everything above the driver speaks in
+"pressed" and "released". At power-on the pins come up low — both relays
+released — for the few microseconds until `Relay_Init()` runs, well inside
+the 1.5 ms the solid-state relays need to react.
 
 Programming connector X2 carries SWDIO, SWCLK, GND and 3V3 only — there is
 **no NRST**, so connect-under-reset is not available.
