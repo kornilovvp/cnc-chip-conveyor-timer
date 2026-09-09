@@ -203,8 +203,12 @@ values, measured timings — so the board can be read without a printf.
 ```
 firmware/   STM32CubeMX project (CNC_TIMER.ioc), HAL drivers, IAR workspace in EWARM/
 hardware/   Altium Designer sources of PCB1_main_rev1
-docs/       schematic and assembly PDF, gerbers
+docs/       schematic and assembly PDF, gerbers, operator's guide (A4), button label (150 x 20 mm)
 ```
+
+For the operator: [one-page guide](docs/operator-guide-A4.pdf) and a
+[label to stick next to the button](docs/button-label-150x20.pdf) — both are
+generated from the `.html` files beside them; print at 100 %.
 
 ## Status
 

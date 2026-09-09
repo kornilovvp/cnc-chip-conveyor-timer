@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>CNC Chip Conveyor Timer — Operator's Guide</title>
+<style>
+  @page { size: A4 portrait; margin: 14mm 16mm; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: "Segoe UI", Arial, Helvetica, sans-serif;
+    font-size: 9.6pt; line-height: 1.32; color: #111; background: #fff;
+    width: 178mm; margin: 0 auto;
+  }
+  @media screen { body { margin: 20px auto; padding: 14mm 16mm; border: 1px solid #ccc; width: 210mm; } }
+  h1 { font-size: 17pt; margin: 0 0 1mm; letter-spacing: .2px; }
+  .sub { color: #555; margin: 0 0 4mm; font-size: 9.5pt; }
+  h2 { font-size: 10.5pt; margin: 4mm 0 1.5mm; padding-bottom: .6mm; border-bottom: 1.2px solid #222; text-transform: uppercase; letter-spacing: .4px; }
+  p { margin: 0 0 1.6mm; }
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 0 8mm; }
+  table { border-collapse: collapse; width: 100%; margin: 0 0 1.5mm; }
+  th, td { padding: .9mm 1.6mm; border: .5px solid #999; vertical-align: top; text-align: left; }
+  th { background: #eee; font-weight: 600; }
+  td.c, th.c { text-align: center; }
+  .dots { font-family: "Segoe UI Symbol", "DejaVu Sans", Arial, sans-serif; letter-spacing: 1px; white-space: nowrap; }
+  .note { background: #f4f4f4; border-left: 2.5px solid #333; padding: 1.4mm 2.4mm; margin: 2mm 0; }
+  .warn { border-left-color: #b00; }
+  .foot { margin-top: 3mm; padding-top: 1.5mm; border-top: .5px solid #999; color: #555; font-size: 8pt; display: flex; justify-content: space-between; }
+  kbd { display: inline-block; border: .6px solid #444; border-radius: 1mm; padding: 0 1.2mm; font: inherit; }
+</style>
+</head>
+<body>
+
+<h1>CNC Chip Conveyor Timer</h1>
+<p class="sub">Operator's guide · one illuminated button, five programs · board PCB1 rev 1</p>
+
+<p><b>What it does.</b> The timer presses the conveyor's START and STOP buttons for you, in a loop:
+run for a while, stop for a while, repeat. While the conveyor stands still the coolant drains off
+the swarf back into the machine, so the chips reach the bin drier and the coolant stays where it belongs.
+When the timer is switched off, the START and STOP buttons on the panel work exactly as before.</p>
+
+<div class="cols">
+<div>
+
+<h2>Controls — one button</h2>
+<p>A command is a series of quick clicks. Click, click, click… then stop.
+The command is accepted <b>0.7 s after the last click</b> (a beep confirms it).</p>
+<table>
+  <tr><th class="c" style="width:26mm">Clicks</th><th>Action</th></tr>
+  <tr><td class="c dots">●</td><td><b>Switch ON</b> in the last used program / <b>switch OFF</b></td></tr>
+  <tr><td class="c dots">●●</td><td>Program 1</td></tr>
+  <tr><td class="c dots">●●●</td><td>Program 2</td></tr>
+  <tr><td class="c dots">●●●●</td><td>Program 3</td></tr>
+  <tr><td class="c dots">●●●●●</td><td>Program 4</td></tr>
+  <tr><td class="c dots">●●●●●●</td><td>Program 5</td></tr>
+</table>
+<p>Choosing a program starts the conveyor cycle at once and is remembered after power-off.
+The timer always powers up switched <b>OFF</b>.</p>
+
+<h2>Programs</h2>
+<table>
+  <tr><th class="c">Program</th><th class="c">Conveyor runs</th><th class="c">Conveyor rests</th></tr>
+  <tr><td class="c">1</td><td class="c">5 s</td><td class="c">5 s</td></tr>
+  <tr><td class="c">2</td><td class="c">10 s</td><td class="c">10 s</td></tr>
+  <tr><td class="c">3</td><td class="c">15 s</td><td class="c">15 s</td></tr>
+  <tr><td class="c">4</td><td class="c">20 s</td><td class="c">30 s</td></tr>
+  <tr><td class="c">5</td><td class="c">30 s</td><td class="c">60 s</td></tr>
+</table>
+<p>Each START and STOP press lasts 0.5 s. Longer rest = drier chips, slower removal.
+Start with program 2 or 3 and adjust.</p>
+
+<div class="note"><b>Automatic switch-off.</b> After <b>4 hours</b> of continuous running the timer
+switches itself off and sounds a 15 s signal. One click starts it again.</div>
+
+</div>
+<div>
+
+<h2>What you hear</h2>
+<table>
+  <tr><th style="width:38mm">Signal</th><th>Meaning</th></tr>
+  <tr><td>Beep, 2 s</td><td>Power on — ready after the beep</td></tr>
+  <tr><td>Beep, 2 s</td><td>Program started or changed</td></tr>
+  <tr><td>Short beep, 0.5 s</td><td>Switched off by the button</td></tr>
+  <tr><td>Long signal, 15 s</td><td>4-hour automatic switch-off</td></tr>
+  <tr><td>Morse SOS <span class="dots">··· −−− ···</span></td><td>Settings memory: first power-on (once, normal) — or a memory fault if it repeats at every power-on</td></tr>
+</table>
+
+<h2>What you see — the button lamp</h2>
+<table>
+  <tr><th style="width:38mm">Lamp</th><th>Meaning</th></tr>
+  <tr><td>Dark</td><td>Timer OFF, panel buttons in manual use</td></tr>
+  <tr><td>Blinks <i>N</i> times, 3 s pause, repeat</td><td>Running program <i>N</i></td></tr>
+  <tr><td>3 blinks at power-on</td><td>Self-test passed</td></tr>
+  <tr><td>Fast flicker while OFF</td><td>Settings memory fault — the timer still works, the program is kept only until power-off. Call service.</td></tr>
+</table>
+
+<h2>Good to know</h2>
+<p>· The two relays can never press START and STOP at the same time; every start begins with both released.</p>
+<p>· Clicks during the power-on beep are ignored — wait for the lamp to go dark, then click.</p>
+<p>· Too many clicks? Anything over six counts as six (program 5).</p>
+<p>· A green LED inside the box shows the state for the technician: lit at power-on, one flash every 3 s when OFF, a different rhythm in each phase when running.</p>
+
+<div class="note warn"><b>Before opening the box</b> switch the machine off. The relays carry the machine's
+START/STOP circuit; the board runs on 24 V.</div>
+
+</div>
+</div>
+
+<div class="foot">
+  <span>cnc-chip-conveyor-timer · github.com/kornilovvp/cnc-chip-conveyor-timer</span>
+  <span>Firmware 2026-09 · MIT</span>
+</div>
+
+</body>
+</html>

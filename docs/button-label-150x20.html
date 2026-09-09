@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Button label 150×20 mm</title>
+<style>
+  /* Print at 100 % scale ("Actual size", no "fit to page"). The outer
+     rectangle is the cut line. Two copies per sheet on A4, plus one on a
+     150x20 mm page for label printers. */
+  @page { size: A4 portrait; margin: 15mm; }
+  body { margin: 0; font-family: "Segoe UI", Arial, Helvetica, sans-serif; background: #fff; color: #000; }
+  .sheet { padding: 0; }
+  .label { width: 150mm; height: 20mm; display: block; margin: 0 0 8mm 0; }
+  .hint { font-size: 9pt; color: #555; margin: 0 0 6mm; }
+  @media print { .hint { display: none; } }
+</style>
+</head>
+<body>
+<div class="sheet">
+<p class="hint">Print at 100 % (actual size). Cut along the outer rectangle: 150 × 20 mm. Two copies below.</p>
+
+<!-- ============ the label ============ -->
+<svg class="label" viewBox="0 0 150 20" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, Helvetica, sans-serif">
+  <defs>
+    <style>
+      .cut  { fill: #fff; stroke: #000; stroke-width: .25; }
+      .div  { stroke: #000; stroke-width: .25; }
+      .cap  { font-size: 2.2px; fill: #444; letter-spacing: .1px; }
+      .big  { font-size: 3.6px; font-weight: 700; }
+      .mid  { font-size: 2.9px; font-weight: 600; }
+      .sm   { font-size: 2.3px; }
+      .dot  { fill: #000; }
+      .title{ font-size: 2.6px; font-weight: 700; letter-spacing: .25px; }
+    </style>
+  </defs>
+
+  <rect class="cut" x="0.125" y="0.125" width="149.75" height="19.75" rx="1"/>
+
+  <!-- ===== block 1: name + how to click (0..36 mm) ===== -->
+  <text class="title" x="2.2" y="4.2">CONVEYOR TIMER</text>
+  <text class="sm" x="2.2" y="8.3">Click quickly, then stop.</text>
+  <text class="sm" x="2.2" y="11.3">Pause 1 s = command sent</text>
+  <text class="sm" x="2.2" y="14.3">Lamp blinks = program No.</text>
+  <text class="sm" x="2.2" y="17.3">4 h → auto OFF (long beep)</text>
+  <line class="div" x1="36" y1="1.5" x2="36" y2="18.5"/>
+
+  <!-- ===== block 2: ON/OFF (36..58 mm) ===== -->
+  <circle class="dot" cx="47" cy="6.2" r="1.7"/>
+  <text class="cap" x="47" y="2.9" text-anchor="middle">1 click</text>
+  <text class="big" x="47" y="13.4" text-anchor="middle">ON / OFF</text>
+  <text class="sm" x="47" y="17.2" text-anchor="middle">last program</text>
+  <line class="div" x1="58" y1="1.5" x2="58" y2="18.5"/>
+
+  <!-- ===== header for programs ===== -->
+  <text class="cap" x="104" y="2.9" text-anchor="middle">clicks  →  program  ·  ▶ run s / ■ rest s</text>
+
+  <!-- ===== program cells: 5 x 18.4 mm from x=58 to 150 ===== -->
+  <!-- P1: 2 clicks -->
+  <g transform="translate(58 0)">
+    <circle class="dot" cx="7.5" cy="6.2" r="1.4"/><circle class="dot" cx="11" cy="6.2" r="1.4"/>
+    <text class="mid" x="9.2" y="12.2" text-anchor="middle">P1</text>
+    <text class="sm" x="9.2" y="16.6" text-anchor="middle">▶5 ■5</text>
+    <line class="div" x1="18.4" y1="4" x2="18.4" y2="18.5"/>
+  </g>
+  <!-- P2: 3 clicks -->
+  <g transform="translate(76.4 0)">
+    <circle class="dot" cx="5.7" cy="6.2" r="1.4"/><circle class="dot" cx="9.2" cy="6.2" r="1.4"/><circle class="dot" cx="12.7" cy="6.2" r="1.4"/>
+    <text class="mid" x="9.2" y="12.2" text-anchor="middle">P2</text>
+    <text class="sm" x="9.2" y="16.6" text-anchor="middle">▶10 ■10</text>
+    <line class="div" x1="18.4" y1="4" x2="18.4" y2="18.5"/>
+  </g>
+  <!-- P3: 4 clicks -->
+  <g transform="translate(94.8 0)">
+    <circle class="dot" cx="4" cy="6.2" r="1.4"/><circle class="dot" cx="7.5" cy="6.2" r="1.4"/><circle class="dot" cx="11" cy="6.2" r="1.4"/><circle class="dot" cx="14.5" cy="6.2" r="1.4"/>
+    <text class="mid" x="9.2" y="12.2" text-anchor="middle">P3</text>
+    <text class="sm" x="9.2" y="16.6" text-anchor="middle">▶15 ■15</text>
+    <line class="div" x1="18.4" y1="4" x2="18.4" y2="18.5"/>
+  </g>
+  <!-- P4: 5 clicks -->
+  <g transform="translate(113.2 0)">
+    <circle class="dot" cx="2.6" cy="6.2" r="1.3"/><circle class="dot" cx="5.9" cy="6.2" r="1.3"/><circle class="dot" cx="9.2" cy="6.2" r="1.3"/><circle class="dot" cx="12.5" cy="6.2" r="1.3"/><circle class="dot" cx="15.8" cy="6.2" r="1.3"/>
+    <text class="mid" x="9.2" y="12.2" text-anchor="middle">P4</text>
+    <text class="sm" x="9.2" y="16.6" text-anchor="middle">▶20 ■30</text>
+    <line class="div" x1="18.4" y1="4" x2="18.4" y2="18.5"/>
+  </g>
+  <!-- P5: 6 clicks -->
+  <g transform="translate(131.6 0)">
+    <circle class="dot" cx="1.9" cy="6.2" r="1.2"/><circle class="dot" cx="4.8" cy="6.2" r="1.2"/><circle class="dot" cx="7.7" cy="6.2" r="1.2"/><circle class="dot" cx="10.6" cy="6.2" r="1.2"/><circle class="dot" cx="13.5" cy="6.2" r="1.2"/><circle class="dot" cx="16.4" cy="6.2" r="1.2"/>
+    <text class="mid" x="9.2" y="12.2" text-anchor="middle">P5</text>
+    <text class="sm" x="9.2" y="16.6" text-anchor="middle">▶30 ■60</text>
+  </g>
+</svg>
+
+<!-- second copy -->
+<svg class="label" viewBox="0 0 150 20" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, Helvetica, sans-serif">
+  <use href="#dummy"/>
+</svg>
+<script>
+  // duplicate the first label into the second slot
+  var s = document.querySelectorAll('svg.label');
+  s[1].innerHTML = s[0].innerHTML;
+</script>
+</div>
+</body>
+</html>
