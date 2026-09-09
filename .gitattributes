@@ -1,0 +1,30 @@
+# Normalise line endings: LF in the repository, native on checkout.
+# The firmware sources are CRLF on disk (CubeMX / IAR convention); this keeps
+# diffs clean for contributors on any platform.
+*               text=auto
+
+*.c             text
+*.h             text
+*.s             text
+*.icf           text
+*.ioc           text
+*.md            text
+*.ewp           text
+*.ewd           text
+*.eww           text
+*.PrjPcb        text
+
+# Altium documents are OLE compound files.
+*.SchDoc        binary
+*.PcbDoc        binary
+*.OutJob        binary
+*.PrjPcbVariants binary
+
+# Outputs and pictures.
+*.pdf           binary
+*.PDF           binary
+*.xlsx          binary
+*.zip           binary
+*.png           binary
+*.jpg           binary
+*.jpeg          binary

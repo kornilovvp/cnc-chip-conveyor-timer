@@ -1,0 +1,74 @@
+# ---------------------------------------------------------------------------
+# IAR Embedded Workbench
+# ---------------------------------------------------------------------------
+# Build output: IAR puts Obj/, List/ and Exe/ in a folder named after the
+# project, next to the .ewp.
+firmware/EWARM/CNC_TIMER/
+**/EWARM/Debug/
+**/EWARM/Release/
+# Per-user workbench state (window layout, breakpoints, debugger session).
+**/EWARM/settings/
+*.dep
+*.ewt
+# Backups IAR and hand edits leave behind.
+**/Backup*of*.ew*
+*.bak
+*.bak_*
+
+# ---------------------------------------------------------------------------
+# STM32CubeMX
+# ---------------------------------------------------------------------------
+# CNC_TIMER.ioc and .mxproject stay: they let anyone regenerate the project.
+#
+# CubeMX copies the entire CMSIS pack. The build uses the core headers in
+# CMSIS/Include and one device header; the rest is dead weight (the DSP
+# libraries and examples alone are 31 MB).
+firmware/Drivers/CMSIS/Core/
+firmware/Drivers/CMSIS/DSP/
+firmware/Drivers/CMSIS/NN/
+firmware/Drivers/CMSIS/RTOS/
+firmware/Drivers/CMSIS/RTOS2/
+firmware/Drivers/CMSIS/docs/
+# Startup and system templates for every part: the project carries its own
+# copies in EWARM/ and Core/Src/.
+firmware/Drivers/CMSIS/Device/ST/STM32G0xx/Source/
+# Device headers: the family header, the STM32G071 header and the system
+# header stay; the other twelve parts are not this board.
+firmware/Drivers/CMSIS/Device/ST/STM32G0xx/Include/*
+!firmware/Drivers/CMSIS/Device/ST/STM32G0xx/Include/stm32g0xx.h
+!firmware/Drivers/CMSIS/Device/ST/STM32G0xx/Include/stm32g071xx.h
+!firmware/Drivers/CMSIS/Device/ST/STM32G0xx/Include/system_stm32g0xx.h
+# The HAL driver is kept whole (7 MB of text): a clone must build, and
+# enabling another peripheral in CubeMX must not fight the ignore list.
+
+# ---------------------------------------------------------------------------
+# Altium Designer
+# ---------------------------------------------------------------------------
+# Autosave history, previews and logs. The design lives in *.SchDoc, *.PcbDoc
+# and *.PrjPcb; everything else here is regenerated.
+**/History/
+**/__Previews/
+**/Project Logs*/
+*.PrjPcbStructure
+*.Annotation
+# Generated outputs (gerbers, BOM, STEP, PDF): large and remade on every
+# release. The ones worth sharing are copied into docs/.
+**/Project Outputs*/
+# One-off netlist export.
+*.NET
+
+# ---------------------------------------------------------------------------
+# Editors and OS
+# ---------------------------------------------------------------------------
+*.code-workspace
+.vscode/
+.idea/
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# ---------------------------------------------------------------------------
+# Private
+# ---------------------------------------------------------------------------
+# Working log in Russian, kept out of the public repository.
+PROGRESS.md
