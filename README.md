@@ -45,9 +45,15 @@ stateDiagram-v2
 | 4 | 20 s | 30 s |
 | 5 | 30 s | 60 s |
 
-The two relays are never closed at the same time. The rule is enforced in the
-relay driver itself — energising one relay releases the other first — and every
-start of the cycle begins with 100 ms of both relays released.
+The two buttons are never pressed at the same time. The rule is enforced in
+the relay driver itself — pressing one lets go of the other first — and every
+start of the cycle begins with 100 ms of neither button pressed.
+
+Both relays sit **energised** whenever the timer is idle: the STOP relay's
+contact passes the machine's STOP circuit, the START relay's contact keeps
+START open, and the operator's own panel buttons work exactly as before — the
+timer is invisible until it is switched on. To press a button the firmware
+*releases* the relay for 500 ms.
 
 After **4 hours** of continuous running the timer switches itself off and
 sounds a 15 s alarm.
@@ -111,8 +117,8 @@ Board `PCB1_main_rev1`, 24 V supply.
 |---|---|---|
 | PB0 | `BUTTON_IN` | 10 kΩ pull-up, button to GND through 1 kΩ — active low |
 | PA6 | `BUTTON_LED_ON` | 1 kΩ → CPC1014N solid-state relay → 24 V → button lamp |
-| PA7 | `START_RELAY` | 1 kΩ → CPC1014N → relay K2 — the machine's START button |
-| PA5 | `STOP_RELAY` | 1 kΩ → CPC1014N → relay K1 — the machine's STOP button |
+| PA7 | `START_RELAY` | 1 kΩ → CPC1014N → relay K2 — the machine's START button. Held at rest, released to press |
+| PA5 | `STOP_RELAY` | 1 kΩ → CPC1014N → relay K1 — the machine's STOP button. Held at rest, released to press |
 | PB3 | `BUZZER` | 1 kΩ → CPC1014N → MLT-9650 active buzzer |
 | PB7 | `DEBUG_LED` | 1 kΩ → HL1 |
 
@@ -121,10 +127,6 @@ Programming connector X2 carries SWDIO, SWCLK, GND and 3V3 only — there is
 
 ### Rev 1 errata
 
-- The relay drivers are wired active **low**. Handled in firmware
-  (`RELAY_START_ACTIVE_LOW` / `RELAY_STOP_ACTIVE_LOW` in `relay.h`); the
-  relays are put to rest microseconds after the pins become outputs, inside the
-  1.5 ms the solid-state relays need to react.
 - The 1 kΩ resistors feeding the CPC1014N inputs give ≈ 2.1 mA against a
   guaranteed turn-on of 2 mA. Works, but marginal; 330–470 Ω next revision.
 - HL1 gets ≈ 1.2 mA and is dim.

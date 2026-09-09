@@ -244,9 +244,10 @@ static void MX_GPIO_Init(void)
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
   /* USER CODE BEGIN MX_GPIO_Init_2 */
-  /* Both relay drivers are active LOW on this board, and the lines above have
-     just driven every output low -- both relays ON. Put them to rest here,
-     microseconds later, before the solid-state relays (1.5 ms) can react. */
+  /* The relays are held energised at rest and released to "press" a button.
+     The lines above have just driven every output low -- both relays released,
+     both buttons pressed at once. Put them to rest here, microseconds later,
+     before the solid-state relays (1.5 ms) can react. */
   Relay_Init();
   /* USER CODE END MX_GPIO_Init_2 */
 }
