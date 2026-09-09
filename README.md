@@ -202,7 +202,7 @@ values, measured timings — so the board can be read without a printf.
 
 ```
 firmware/   STM32CubeMX project (CNC_TIMER.ioc), HAL drivers, IAR workspace in EWARM/
-hardware/   Altium Designer sources of PCB1_main_rev1
+hardware/   Altium Designer sources of PCB1_main_rev1 (schematic, PCB, Draftsman assembly drawing)
 docs/       schematic and assembly PDF, gerbers, operator's guide (A4), button label (150 x 20 mm)
 ```
 

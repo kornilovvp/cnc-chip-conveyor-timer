@@ -28,3 +28,4 @@
 *.png           binary
 *.jpg           binary
 *.jpeg          binary
+*.PCBDwf        binary
