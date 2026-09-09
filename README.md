@@ -6,7 +6,7 @@ into the machine instead of leaving with the chips.
 
 ![MCU](https://img.shields.io/badge/MCU-STM32G071GBU6-03234B?logo=stmicroelectronics&logoColor=white)
 ![Toolchain](https://img.shields.io/badge/toolchain-STM32CubeMX%20%2B%20IAR%20EWARM-555)
-![Status](https://img.shields.io/badge/status-hardware%20bring--up-orange)
+![Status](https://img.shields.io/badge/status-testing-yellow)
 ![License](https://img.shields.io/badge/license-MIT-green)
 
 <!-- photo of the box on the machine: docs/photo.jpg -->
@@ -171,9 +171,10 @@ docs/       schematic and assembly PDF, gerbers
 
 ## Status
 
-Hardware bring-up. The button, lamp, buzzer, HL1 and start-up sequence have
-been verified on the board; the relay cycle, flash settings and the fault
-handling are written but not yet run on hardware.
+Testing. The firmware builds and runs on the rev 1 board: button, relay
+cycle, mode selection and storage, indication and sounds all work. Long-run
+behaviour (the 4 h auto-off, flash wear, the fault paths) is still being
+exercised before the first release.
 
 ## License
 
