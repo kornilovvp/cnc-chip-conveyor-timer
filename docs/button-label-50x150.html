@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Button label 50×150 mm (vertical)</title>
+<style>
+  /* Print at 100 % scale ("Actual size"). Outer rectangle = cut line.
+     Three copies side by side on an A4 sheet. */
+  @page { size: A4 portrait; margin: 15mm; }
+  body { margin: 0; font-family: "Segoe UI", Arial, Helvetica, sans-serif; background: #fff; color: #000; }
+  .row { display: flex; gap: 10mm; }
+  .label { width: 50mm; height: 150mm; display: block; }
+  .hint { font-size: 9pt; color: #555; margin: 0 0 6mm; }
+  @media print { .hint { display: none; } }
+</style>
+</head>
+<body>
+<p class="hint">Print at 100 % (actual size). Cut along the outer rectangle: 50 × 150 mm. Three copies.</p>
+<div class="row">
+
+<svg id="src" class="label" viewBox="0 0 50 150" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, Helvetica, sans-serif">
+  <defs>
+    <style>
+      .cut   { fill: #fff; stroke: #000; stroke-width: .25; }
+      .div   { stroke: #000; stroke-width: .25; }
+      .band  { fill: #000; }
+      .white { fill: #fff; }
+      .title { font-size: 4.2px; font-weight: 700; letter-spacing: .3px; }
+      .h     { font-size: 3px; font-weight: 700; letter-spacing: .2px; }
+      .big   { font-size: 5.2px; font-weight: 700; }
+      .p     { font-size: 4.6px; font-weight: 700; }
+      .t     { font-size: 3.1px; }
+      .s     { font-size: 2.7px; fill: #333; }
+      .cap   { font-size: 2.5px; fill: #444; }
+      .dot   { fill: #000; }
+    </style>
+  </defs>
+
+  <rect class="cut" x="0.125" y="0.125" width="49.75" height="149.75" rx="1.5"/>
+
+  <!-- title band -->
+  <rect class="band" x="0.125" y="0.125" width="49.75" height="9" rx="1.5"/>
+  <rect class="band" x="0.125" y="5" width="49.75" height="4.125"/>
+  <text class="title white" x="25" y="6.3" text-anchor="middle">CONVEYOR TIMER</text>
+
+  <text class="t" x="25" y="13.6" text-anchor="middle">Click quickly, then stop.</text>
+  <text class="t" x="25" y="17.6" text-anchor="middle">Pause 1 s = command sent (beep)</text>
+
+  <line class="div" x1="3" y1="20.5" x2="47" y2="20.5"/>
+
+  <!-- ON / OFF -->
+  <circle class="dot" cx="9" cy="28.5" r="2.2"/>
+  <text class="cap" x="9" y="35" text-anchor="middle">1 click</text>
+  <text class="big" x="18" y="30.3">ON / OFF</text>
+  <text class="s" x="18" y="34.6">starts the last program</text>
+
+  <line class="div" x1="3" y1="38.5" x2="47" y2="38.5"/>
+
+  <!-- programs header -->
+  <text class="h" x="3" y="43.2">PROGRAMS</text>
+  <text class="cap" x="47" y="43.2" text-anchor="end">▶ run s   ■ rest s</text>
+
+  <!-- 5 rows, 13 mm each, from y = 46 -->
+  <g id="rows">
+    <!-- P1 -->
+    <g transform="translate(0 46)">
+      <circle class="dot" cx="5.5" cy="5.5" r="1.6"/><circle class="dot" cx="9.7" cy="5.5" r="1.6"/>
+      <text class="p" x="26" y="7.2" text-anchor="middle">P1</text>
+      <text class="t" x="47" y="4.6" text-anchor="end">▶ 5 s</text>
+      <text class="t" x="47" y="9" text-anchor="end">■ 5 s</text>
+      <line class="div" x1="3" y1="12" x2="47" y2="12" stroke-dasharray=".6 .6"/>
+    </g>
+    <!-- P2 -->
+    <g transform="translate(0 59)">
+      <circle class="dot" cx="5.5" cy="5.5" r="1.6"/><circle class="dot" cx="9.7" cy="5.5" r="1.6"/><circle class="dot" cx="13.9" cy="5.5" r="1.6"/>
+      <text class="p" x="26" y="7.2" text-anchor="middle">P2</text>
+      <text class="t" x="47" y="4.6" text-anchor="end">▶ 10 s</text>
+      <text class="t" x="47" y="9" text-anchor="end">■ 10 s</text>
+      <line class="div" x1="3" y1="12" x2="47" y2="12" stroke-dasharray=".6 .6"/>
+    </g>
+    <!-- P3 -->
+    <g transform="translate(0 72)">
+      <circle class="dot" cx="5.5" cy="5.5" r="1.6"/><circle class="dot" cx="9.7" cy="5.5" r="1.6"/><circle class="dot" cx="13.9" cy="5.5" r="1.6"/><circle class="dot" cx="18.1" cy="5.5" r="1.6"/>
+      <text class="p" x="28" y="7.2" text-anchor="middle">P3</text>
+      <text class="t" x="47" y="4.6" text-anchor="end">▶ 15 s</text>
+      <text class="t" x="47" y="9" text-anchor="end">■ 15 s</text>
+      <line class="div" x1="3" y1="12" x2="47" y2="12" stroke-dasharray=".6 .6"/>
+    </g>
+    <!-- P4 -->
+    <g transform="translate(0 85)">
+      <circle class="dot" cx="5.5" cy="5.5" r="1.6"/><circle class="dot" cx="9.7" cy="5.5" r="1.6"/><circle class="dot" cx="13.9" cy="5.5" r="1.6"/><circle class="dot" cx="18.1" cy="5.5" r="1.6"/><circle class="dot" cx="22.3" cy="5.5" r="1.6"/>
+      <text class="p" x="30" y="7.2" text-anchor="middle">P4</text>
+      <text class="t" x="47" y="4.6" text-anchor="end">▶ 20 s</text>
+      <text class="t" x="47" y="9" text-anchor="end">■ 30 s</text>
+      <line class="div" x1="3" y1="12" x2="47" y2="12" stroke-dasharray=".6 .6"/>
+    </g>
+    <!-- P5 -->
+    <g transform="translate(0 98)">
+      <circle class="dot" cx="5.5" cy="5.5" r="1.6"/><circle class="dot" cx="9.7" cy="5.5" r="1.6"/><circle class="dot" cx="13.9" cy="5.5" r="1.6"/><circle class="dot" cx="18.1" cy="5.5" r="1.6"/><circle class="dot" cx="22.3" cy="5.5" r="1.6"/><circle class="dot" cx="26.5" cy="5.5" r="1.6"/>
+      <text class="p" x="33" y="7.2" text-anchor="middle">P5</text>
+      <text class="t" x="47" y="4.6" text-anchor="end">▶ 30 s</text>
+      <text class="t" x="47" y="9" text-anchor="end">■ 60 s</text>
+    </g>
+  </g>
+
+  <line class="div" x1="3" y1="112" x2="47" y2="112"/>
+
+  <!-- hints -->
+  <text class="h" x="3" y="117">LAMP</text>
+  <text class="s" x="3" y="121.2">blinks N times, pause = program N</text>
+  <text class="s" x="3" y="125">dark = OFF, panel buttons manual</text>
+  <text class="s" x="3" y="128.8">fast flicker = memory fault, call service</text>
+
+  <text class="h" x="3" y="134.6">SOUND</text>
+  <text class="s" x="3" y="138.8">2 s = on / program set · 0.5 s = off</text>
+  <text class="s" x="3" y="142.6">15 s = auto OFF after 4 h of running</text>
+  <text class="s" x="3" y="146.4">SOS at every power-on = call service</text>
+</svg>
+
+<svg class="label copy" viewBox="0 0 50 150" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, Helvetica, sans-serif"></svg>
+<svg class="label copy" viewBox="0 0 50 150" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, Helvetica, sans-serif"></svg>
+
+</div>
+<script>
+  var src = document.getElementById('src').innerHTML;
+  document.querySelectorAll('svg.copy').forEach(function (e) { e.innerHTML = src; });
+</script>
+</body>
+</html>

@@ -207,8 +207,9 @@ docs/       schematic and assembly PDF, gerbers, operator's guide (A4), button l
 ```
 
 For the operator: [one-page guide](docs/operator-guide-A4.pdf) and a
-[label to stick next to the button](docs/button-label-150x20.pdf) — both are
-generated from the `.html` files beside them; print at 100 %.
+label to stick next to the button, [150 × 20 mm strip](docs/button-label-150x20.pdf)
+or [50 × 150 mm vertical](docs/button-label-50x150.pdf) — all generated from the
+`.html` files beside them; print at 100 %.
 
 ## Status
 
