@@ -4,7 +4,7 @@
   * @brief          : Command button: debounce + click series detector
   ******************************************************************************
   * The command button (X1) is a single illuminated push-button. A command is
-  * encoded as a series of clicks: the operator clicks 1..6 times, then stops.
+  * encoded as a series of clicks: the operator clicks 1..4 times, then stops.
   * After BTN_SERIES_GAP_MS of inactivity the series is closed and the click
   * count is reported once through Button_GetSeries().
   *
@@ -48,7 +48,7 @@ extern "C" {
    over that, so a slow series is not split into two commands.
 
    Cost: the command fires 700 ms after the last release, and the worst case
-   (5 slow clicks) takes ~3.7 s end to end. */
+   (4 slow clicks) takes ~3.0 s end to end. */
 #define BTN_SERIES_GAP_MS         700u
 
 
@@ -58,8 +58,8 @@ extern "C" {
 
 
 /* Longest series the protocol knows. Extra clicks are still counted, but the
-   reported value saturates here: 8 clicks come out as 6. */
-#define BTN_CLICKS_MAX              6u
+   reported value saturates here: 6 clicks come out as 4. */
+#define BTN_CLICKS_MAX              4u
 
 
 /* Debug ---------------------------------------------------------------------*/

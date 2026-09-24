@@ -12,7 +12,7 @@
   *              with 3 s of dark between bursts, 4 h auto-off clock running
   *
   *   1 click    OFF -> RUN in the stored mode  /  RUN -> OFF
-  *   2..6       select mode 1..5, store it, (re)start the cycle
+  *   2..4       select mode 1..3, store it, (re)start the cycle
   *   4 h        RUN -> OFF, 15 s alarm beep
   *
   * Every start of the cycle is announced with a 2 s beep, switching off by
@@ -96,7 +96,7 @@ typedef struct
   uint32_t mode_changes;  /* new mode selected                              */
 
   uint8_t  state;         /* app_state_t                                    */
-  uint8_t  mode;          /* mode in force, 1..5                            */
+  uint8_t  mode;          /* mode in force, 1..3                            */
   uint8_t  last_clicks;   /* last click series handled                      */
   uint8_t  fault;         /* 1 = settings store faulty, alarm was raised    */
 } app_debug_t;

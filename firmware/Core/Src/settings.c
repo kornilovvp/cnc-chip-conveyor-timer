@@ -22,8 +22,13 @@
 /* A record is one double word:
      low word  = SET_MAGIC | (~mode & 0xFF) << 8 | mode
      high word = 0
-   An erased slot reads 0xFFFFFFFF in both words. */
-#define SET_MAGIC            0x5E770000u
+   An erased slot reads 0xFFFFFFFF in both words.
+
+   The magic was 0x5E77 while there were five modes. It changed with the move
+   to three, so the old records fail validation: the first power-on after the
+   update repairs the page and starts over at SET_MODE_DEFAULT, whatever mode
+   the old firmware had stored. */
+#define SET_MAGIC            0x5E730000u
 #define SET_MAGIC_MASK       0xFFFF0000u
 #define SET_ERASED           0xFFFFFFFFu
 

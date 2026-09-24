@@ -21,7 +21,7 @@ Run the conveyor in short bursts instead, with a pause in between, and the
 coolant drains off the belt while it stands still. Chips come out drier, the
 coolant stays where it belongs.
 
-This box does the pressing. One illuminated button, five run / pause programs,
+This box does the pressing. One illuminated button, three run / pause programs,
 one relay for START and one for STOP.
 
 ## How it works
@@ -39,11 +39,9 @@ stateDiagram-v2
 
 | Mode | T1 — conveyor runs | T2 — conveyor rests |
 |:---:|:---:|:---:|
-| 1 | 15 s | 15 s |
-| 2 | 30 s | 60 s |
-| 3 | 45 s | 90 s |
-| 4 | 60 s | 120 s |
-| 5 | 60 s | 240 s |
+| 1 | 90 s | 360 s (6 min) |
+| 2 | 90 s | 720 s (12 min) |
+| 3 | 90 s | 1080 s (18 min) |
 
 The two buttons are never pressed at the same time. The rule is enforced in
 the relay driver itself — pressing one lets go of the other first — and every
@@ -68,12 +66,10 @@ the series ends when the button stays released for 0.7 s.
 | 2 | Mode 1 |
 | 3 | Mode 2 |
 | 4 | Mode 3 |
-| 5 | Mode 4 |
-| 6 | Mode 5 |
 
 Selecting a mode stores it in flash and starts (or restarts) the cycle at once.
-The stored mode survives a power cycle; the device always powers up switched
-off.
+More than four clicks count as four. The stored mode survives a power cycle;
+the device always powers up switched off.
 
 **Sounds**
 
@@ -132,9 +128,8 @@ Board `PCB1_main_rev1`, 24 V supply.
 - HL1 gets ≈ 1.2 mA and is dim.
 
 Design sources (Altium) are in [`hardware/`](hardware/). Ready to
-use: [schematic and assembly PDF](docs/CNC_rev1_2026-08-26.pdf) and
-[gerbers, drill and pick-and-place](docs/CNC_rev1_gerber_2026-08-26.zip) in
-`docs/`.
+use: [schematic](docs/CNC_rev1_2026-09-09.PDF) and
+[assembly drawing](docs/Assembly.PDF) in `docs/`.
 
 ## Firmware
 
@@ -154,10 +149,10 @@ SWD with STM32CubeProgrammer at `0x08000000` if you only want to run the board.
    `firmware/EWARM/CNC_TIMER/Exe/CNC_TIMER.hex` (the output converter is on).
 3. Flash over SWD. X2 has no NRST line, so the debugger cannot reset the
    board — power-cycle it instead.
-4. The shipped `.hex` was built with compiler optimisation **switched off**.
-   The project file carries CubeMX's default, High / Size; to reproduce the
-   shipped image set Project → Options → C/C++ Compiler → Optimizations →
-   Level: None before building.
+4. Compiler optimisation is **switched off** (Level: None) in the project
+   file, and the shipped `.hex` is built that way. Regenerating the project
+   in CubeMX puts back its default, High / Size — set it to None again under
+   Project → Options → C/C++ Compiler → Optimizations.
 
 | Module | Job |
 |---|---|
@@ -175,16 +170,20 @@ The main loop never blocks. `Button_Tick()` runs from SysTick every 1 ms; every
 other module is polled from the loop and works from `HAL_GetTick()`.
 
 The settings page is the last 2 KB of flash (`0x0801F800`); the linker script
-ends ROM one page early so no code can land there. Every module exposes a
-`volatile` `g_*` structure for the IAR Live Watch window — counters, live
-values, measured timings — so the board can be read without a printf.
+ends ROM one page early so no code can land there. Firmware from before
+2026-09-24 had five programs; its stored mode is not carried over — the first
+power-on after the update repairs the page and starts at mode 1.
+
+Every module exposes a `volatile` `g_*` structure for the IAR Live Watch
+window — counters, live values, measured timings — so the board can be read
+without a printf.
 
 ## Repository layout
 
 ```
 firmware/   STM32CubeMX project (CNC_TIMER.ioc), HAL drivers, IAR workspace in EWARM/
 hardware/   Altium Designer sources of PCB1_main_rev1 (schematic, PCB, Draftsman assembly drawing)
-docs/       schematic and assembly PDF, gerbers, operator's guide (A4), button label (150 x 20 mm)
+docs/       schematic and assembly PDFs, operator's guide (A4), button labels (150 x 20 and 50 x 150 mm)
 ```
 
 For the operator: [one-page guide](docs/operator-guide-A4.pdf) and a

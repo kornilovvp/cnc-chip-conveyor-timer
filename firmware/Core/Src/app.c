@@ -26,19 +26,17 @@ typedef struct
 
 static const mode_time_t k_mode[SET_MODE_MAX + 1u] =
 {
-  {      0u,      0u },   /* 0: not a mode                                     */
-  {  15000u,  15000u },   /* MODE_1                                            */
-  {  30000u,  60000u },   /* MODE_2                                            */
-  {  45000u,  90000u },   /* MODE_3                                            */
-  {  60000u, 120000u },   /* MODE_4                                            */
-  {  60000u, 240000u }    /* MODE_5                                            */
+  {      0u,       0u },   /* 0: not a mode                                   */
+  {  90000u,  360000u },   /* MODE_1:  90 s /  6 min                          */
+  {  90000u,  720000u },   /* MODE_2:  90 s / 12 min                          */
+  {  90000u, 1080000u }    /* MODE_3:  90 s / 18 min                          */
 };
 
 
 /* Private variables ---------------------------------------------------------*/
 
 static app_state_t   s_state;
-static uint8_t       s_mode;       /* mode in force, 1..5                    */
+static uint8_t       s_mode;       /* mode in force, 1..3                    */
 static uint8_t       s_fault;      /* 1 = settings store faulty              */
 static uint32_t      s_state_t0;   /* when the current state began           */
 static uint32_t      s_run_t0;     /* when RUN began: the 4 h clock          */
@@ -173,7 +171,7 @@ static void App_Off(void)
 
 /**
   * @brief  Dispatch a click series.
-  *         1 click toggles OFF / RUN. 2..6 clicks select mode 1..5, store it
+  *         1 click toggles OFF / RUN. 2..4 clicks select mode 1..3, store it
   *         and (re)start the cycle -- from OFF as well as from RUN.
   */
 static void App_OnClicks(uint8_t clicks)

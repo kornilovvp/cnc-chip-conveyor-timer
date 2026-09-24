@@ -32,7 +32,7 @@
 <body>
 
 <h1>CNC Chip Conveyor Timer</h1>
-<p class="sub">Operator's guide · one illuminated button, five programs · board PCB1 rev 1</p>
+<p class="sub">Operator's guide · one illuminated button, three programs · board PCB1 rev 1</p>
 
 <p><b>What it does.</b> The timer presses the conveyor's START and STOP buttons for you, in a loop:
 run for a while, stop for a while, repeat. While the conveyor stands still the coolant drains off
@@ -51,8 +51,6 @@ The command is accepted <b>0.7 s after the last click</b> (a beep confirms it).<
   <tr><td class="c dots">●●</td><td>Program 1</td></tr>
   <tr><td class="c dots">●●●</td><td>Program 2</td></tr>
   <tr><td class="c dots">●●●●</td><td>Program 3</td></tr>
-  <tr><td class="c dots">●●●●●</td><td>Program 4</td></tr>
-  <tr><td class="c dots">●●●●●●</td><td>Program 5</td></tr>
 </table>
 <p>Choosing a program starts the conveyor cycle at once and is remembered after power-off.
 The timer always powers up switched <b>OFF</b>.</p>
@@ -60,17 +58,15 @@ The timer always powers up switched <b>OFF</b>.</p>
 <h2>Programs</h2>
 <table>
   <tr><th class="c">Program</th><th class="c">Conveyor runs</th><th class="c">Conveyor rests</th></tr>
-  <tr><td class="c">1</td><td class="c">15 s</td><td class="c">15 s</td></tr>
-  <tr><td class="c">2</td><td class="c">30 s</td><td class="c">60 s</td></tr>
-  <tr><td class="c">3</td><td class="c">45 s</td><td class="c">90 s</td></tr>
-  <tr><td class="c">4</td><td class="c">60 s</td><td class="c">120 s</td></tr>
-  <tr><td class="c">5</td><td class="c">60 s</td><td class="c">240 s</td></tr>
+  <tr><td class="c">1</td><td class="c">90 s</td><td class="c">360 s (6 min)</td></tr>
+  <tr><td class="c">2</td><td class="c">90 s</td><td class="c">720 s (12 min)</td></tr>
+  <tr><td class="c">3</td><td class="c">90 s</td><td class="c">1080 s (18 min)</td></tr>
 </table>
 <p>Each START and STOP press lasts 0.5 s. Longer rest = drier chips, slower removal.
-Start with program 2 or 3 and adjust.</p>
+Start with program 1; if the chips still come out wet, go to 2 or 3.</p>
 
 <div class="note"><b>Automatic switch-off.</b> After <b>4 hours</b> of continuous running the timer
-switches itself off and sounds a 15 s signal. One click starts it again.</div>
+switches itself off and sounds a 15&nbsp;s signal. One click starts it again.</div>
 
 </div>
 <div>
@@ -97,7 +93,7 @@ switches itself off and sounds a 15 s signal. One click starts it again.</div>
 <h2>Good to know</h2>
 <p>· The two relays can never press START and STOP at the same time; every start begins with both released.</p>
 <p>· Clicks during the power-on beep are ignored — wait for the lamp to go dark, then click.</p>
-<p>· Too many clicks? Anything over six counts as six (program 5).</p>
+<p>· Too many clicks? Anything over four counts as four (program 3).</p>
 <p>· A green LED inside the box shows the state for the technician: lit at power-on, one flash every 3 s when OFF, a different rhythm in each phase when running.</p>
 
 <div class="note warn"><b>Before opening the box</b> switch the machine off. The relays carry the machine's

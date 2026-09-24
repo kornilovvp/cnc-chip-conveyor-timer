@@ -28,8 +28,8 @@ extern "C" {
 
 /* Timing --------------------------------------------------------------------*/
 
-/* One blink inside a burst. Short enough that five of them can be counted
-   and still leave the lamp dark for half of a 4 s period. */
+/* One blink inside a burst. Slow enough to count, short enough that the
+   longest burst -- three blinks, MODE_3 -- is over in 1.2 s. */
 #define IND_BLINK_ON_MS       200u
 #define IND_BLINK_OFF_MS      200u
 

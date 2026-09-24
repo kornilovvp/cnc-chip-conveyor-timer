@@ -39,7 +39,7 @@ extern "C" {
 /* Limits --------------------------------------------------------------------*/
 
 #define SET_MODE_MIN          1u
-#define SET_MODE_MAX          5u
+#define SET_MODE_MAX          3u
 #define SET_MODE_DEFAULT      1u   /* first power-on, or nothing valid found */
 
 

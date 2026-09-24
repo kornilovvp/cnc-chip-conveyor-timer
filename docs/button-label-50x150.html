@@ -28,8 +28,9 @@
       .title { font-size: 4.2px; font-weight: 700; letter-spacing: .3px; }
       .h     { font-size: 3px; font-weight: 700; letter-spacing: .2px; }
       .big   { font-size: 5.2px; font-weight: 700; }
-      .p     { font-size: 4.6px; font-weight: 700; }
+      .p     { font-size: 6.4px; font-weight: 700; }
       .t     { font-size: 3.1px; }
+      .tt    { font-size: 3.8px; }
       .s     { font-size: 2.7px; fill: #333; }
       .cap   { font-size: 2.5px; fill: #444; }
       .dot   { fill: #000; }
@@ -58,48 +59,33 @@
 
   <!-- programs header -->
   <text class="h" x="3" y="43.2">PROGRAMS</text>
-  <text class="cap" x="47" y="43.2" text-anchor="end">▶ run s   ■ rest s</text>
+  <text class="cap" x="47" y="43.2" text-anchor="end">▶ run   ■ rest</text>
 
-  <!-- 5 rows, 13 mm each, from y = 46 -->
+  <!-- 3 rows, 22 mm each, from y = 46: clicks and program number on the
+       left, run / rest on the right -->
   <g id="rows">
     <!-- P1 -->
     <g transform="translate(0 46)">
-      <circle class="dot" cx="5.5" cy="5.5" r="1.6"/><circle class="dot" cx="9.7" cy="5.5" r="1.6"/>
-      <text class="p" x="26" y="7.2" text-anchor="middle">P1</text>
-      <text class="t" x="47" y="4.6" text-anchor="end">▶ 15 s</text>
-      <text class="t" x="47" y="9" text-anchor="end">■ 15 s</text>
-      <line class="div" x1="3" y1="12" x2="47" y2="12" stroke-dasharray=".6 .6"/>
+      <circle class="dot" cx="5" cy="6.5" r="1.9"/><circle class="dot" cx="9.8" cy="6.5" r="1.9"/>
+      <text class="p" x="3" y="17.5">P1</text>
+      <text class="tt" x="47" y="9" text-anchor="end">▶ 90 s</text>
+      <text class="tt" x="47" y="16" text-anchor="end">■ 6 min</text>
+      <line class="div" x1="3" y1="21" x2="47" y2="21" stroke-dasharray=".6 .6"/>
     </g>
     <!-- P2 -->
-    <g transform="translate(0 59)">
-      <circle class="dot" cx="5.5" cy="5.5" r="1.6"/><circle class="dot" cx="9.7" cy="5.5" r="1.6"/><circle class="dot" cx="13.9" cy="5.5" r="1.6"/>
-      <text class="p" x="26" y="7.2" text-anchor="middle">P2</text>
-      <text class="t" x="47" y="4.6" text-anchor="end">▶ 30 s</text>
-      <text class="t" x="47" y="9" text-anchor="end">■ 60 s</text>
-      <line class="div" x1="3" y1="12" x2="47" y2="12" stroke-dasharray=".6 .6"/>
+    <g transform="translate(0 68)">
+      <circle class="dot" cx="5" cy="6.5" r="1.9"/><circle class="dot" cx="9.8" cy="6.5" r="1.9"/><circle class="dot" cx="14.6" cy="6.5" r="1.9"/>
+      <text class="p" x="3" y="17.5">P2</text>
+      <text class="tt" x="47" y="9" text-anchor="end">▶ 90 s</text>
+      <text class="tt" x="47" y="16" text-anchor="end">■ 12 min</text>
+      <line class="div" x1="3" y1="21" x2="47" y2="21" stroke-dasharray=".6 .6"/>
     </g>
     <!-- P3 -->
-    <g transform="translate(0 72)">
-      <circle class="dot" cx="5.5" cy="5.5" r="1.6"/><circle class="dot" cx="9.7" cy="5.5" r="1.6"/><circle class="dot" cx="13.9" cy="5.5" r="1.6"/><circle class="dot" cx="18.1" cy="5.5" r="1.6"/>
-      <text class="p" x="28" y="7.2" text-anchor="middle">P3</text>
-      <text class="t" x="47" y="4.6" text-anchor="end">▶ 45 s</text>
-      <text class="t" x="47" y="9" text-anchor="end">■ 90 s</text>
-      <line class="div" x1="3" y1="12" x2="47" y2="12" stroke-dasharray=".6 .6"/>
-    </g>
-    <!-- P4 -->
-    <g transform="translate(0 85)">
-      <circle class="dot" cx="5.5" cy="5.5" r="1.6"/><circle class="dot" cx="9.7" cy="5.5" r="1.6"/><circle class="dot" cx="13.9" cy="5.5" r="1.6"/><circle class="dot" cx="18.1" cy="5.5" r="1.6"/><circle class="dot" cx="22.3" cy="5.5" r="1.6"/>
-      <text class="p" x="30" y="7.2" text-anchor="middle">P4</text>
-      <text class="t" x="47" y="4.6" text-anchor="end">▶ 60 s</text>
-      <text class="t" x="47" y="9" text-anchor="end">■ 120 s</text>
-      <line class="div" x1="3" y1="12" x2="47" y2="12" stroke-dasharray=".6 .6"/>
-    </g>
-    <!-- P5 -->
-    <g transform="translate(0 98)">
-      <circle class="dot" cx="5.5" cy="5.5" r="1.6"/><circle class="dot" cx="9.7" cy="5.5" r="1.6"/><circle class="dot" cx="13.9" cy="5.5" r="1.6"/><circle class="dot" cx="18.1" cy="5.5" r="1.6"/><circle class="dot" cx="22.3" cy="5.5" r="1.6"/><circle class="dot" cx="26.5" cy="5.5" r="1.6"/>
-      <text class="p" x="33" y="7.2" text-anchor="middle">P5</text>
-      <text class="t" x="47" y="4.6" text-anchor="end">▶ 60 s</text>
-      <text class="t" x="47" y="9" text-anchor="end">■ 240 s</text>
+    <g transform="translate(0 90)">
+      <circle class="dot" cx="5" cy="6.5" r="1.9"/><circle class="dot" cx="9.8" cy="6.5" r="1.9"/><circle class="dot" cx="14.6" cy="6.5" r="1.9"/><circle class="dot" cx="19.4" cy="6.5" r="1.9"/>
+      <text class="p" x="3" y="17.5">P3</text>
+      <text class="tt" x="47" y="9" text-anchor="end">▶ 90 s</text>
+      <text class="tt" x="47" y="16" text-anchor="end">■ 18 min</text>
     </g>
   </g>
 
