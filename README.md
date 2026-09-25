@@ -122,6 +122,13 @@ board is repaired.
 
 Board `PCB1_main_rev1`, 24 V supply.
 
+<img src="docs/PCB.png" alt="PCB1_main_rev1, 3D view of the top side" width="420">
+
+*Top side, Altium 3D view. The terminal block at the top right goes to the
+machine: 24 V supply, START and STOP. The two white relays press START and
+STOP. PROG is the SWD connector X2; the connector marked BUTTON goes to the
+illuminated button.*
+
 | MCU pin | Signal | Circuit |
 |---|---|---|
 | PB0 | `BUTTON_IN` | 10 kΩ pull-up, button to GND through 1 kΩ — active low |
@@ -197,7 +204,7 @@ without a printf.
 ```
 firmware/   STM32CubeMX project (CNC_TIMER.ioc), HAL drivers, IAR workspace in EWARM/
 hardware/   Altium Designer sources of PCB1_main_rev1 (schematic, PCB, Draftsman assembly drawing)
-docs/       schematic and assembly PDFs, operator's guide (A4), button labels (150 x 20 and 50 x 150 mm)
+docs/       schematic and assembly PDFs, PCB render, operator's guide (A4), button labels (150 x 20 and 50 x 150 mm)
 ```
 
 For the operator: [one-page guide](docs/operator-guide-A4.pdf) and a
