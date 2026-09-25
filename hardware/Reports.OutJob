@@ -15,13 +15,13 @@ LifeCycleDefinitionGUID=
 RevisionNamingSchemeGUID=
 
 [OutputGroup1]
-Name=Reports.OutJob
+Name=
 Description=
-TargetOutputMedium=STEP
+TargetOutputMedium=BOM
 VariantName=[No Variations]
 VariantScope=0
 CurrentConfigurationName=
-TargetPrinter=npi427c6f (HP LaserJet P2055dn)
+TargetPrinter=HP LaserJet P205X series PCL6 Class Driver
 PrinterOptions=Record=PrinterOptions|Copies=1|Duplex=1|TrueTypeOptions=3|Collate=1|PrintJobKind=1|PrintWhat=1
 OutputMedium1=Print Job
 OutputMedium1_Type=Printer
@@ -461,7 +461,7 @@ OutputName18=Export STEP
 OutputCategory18=Export
 OutputDocumentPath18=
 OutputVariantName18=
-OutputEnabled18=1
+OutputEnabled18=0
 OutputEnabled18_OutputMedium1=0
 OutputEnabled18_OutputMedium2=0
 OutputEnabled18_OutputMedium3=0
@@ -590,7 +590,7 @@ OutputName25=BOM
 OutputCategory25=Report
 OutputDocumentPath25=
 OutputVariantName25=jlcpcb
-OutputEnabled25=0
+OutputEnabled25=1
 OutputEnabled25_OutputMedium1=0
 OutputEnabled25_OutputMedium2=0
 OutputEnabled25_OutputMedium3=1
@@ -605,7 +605,7 @@ PageOptions25=Record=PageOptions|CenterHorizontal=True|CenterVertical=True|Print
 Configuration25_Name1=ColumnNameFormat
 Configuration25_Item1=CaptionAsName
 Configuration25_Name2=General
-Configuration25_Item2=OpenExported=False|AddToProject=False|ReportBOMViolationsInMessages=False|ForceFit=False|NotFitted=False|Database=False|DatabasePriority=False|IncludePcbData=False|IncludeVaultData=False|IncludeCloudData=False|IncludeDocumentData=True|IncludeAlternatives=False|ShowExportOptions=True|TemplateFilename=|TemplateVaultGuid=|TemplateItemGuid=|TemplateRevisionGuid=|BatchMode=5|FormWidth=1782|FormHeight=710|SupplierProdQty=1|SupplierAutoQty=False|SupplierUseCachedPricing=False|SupplierCurrency=<none>|SolutionsPerItem=1|SuppliersPerSolution=1|ViewType=1|UseDirectApi=False|BomSetName=
+Configuration25_Item2=OpenExported=False|AddToProject=False|ReportBOMViolationsInMessages=False|ForceFit=False|NotFitted=False|Database=False|DatabasePriority=False|IncludePcbData=False|IncludeVaultData=False|IncludeCloudData=False|IncludeDocumentData=True|IncludeAlternatives=False|ShowExportOptions=True|TemplateFilename=|TemplateVaultGuid=|TemplateItemGuid=|TemplateRevisionGuid=|BatchMode=5|FormWidth=1782|FormHeight=710|SupplierProdQty=1|SupplierAutoQty=False|SupplierUseCachedPricing=False|SupplierCurrency=<none>|SolutionsPerItem=1|SuppliersPerSolution=1|ViewType=1|BomSetName=
 Configuration25_Name3=GroupOrder
 Configuration25_Item3=Part Number=True
 Configuration25_Name4=OutputConfigurationParameter1
@@ -662,7 +662,7 @@ OutputVariantName28=digikey
 OutputEnabled28=0
 OutputEnabled28_OutputMedium1=0
 OutputEnabled28_OutputMedium2=0
-OutputEnabled28_OutputMedium3=2
+OutputEnabled28_OutputMedium3=0
 OutputEnabled28_OutputMedium4=0
 OutputEnabled28_OutputMedium5=0
 OutputEnabled28_OutputMedium6=0
@@ -674,7 +674,7 @@ PageOptions28=Record=PageOptions|CenterHorizontal=True|CenterVertical=True|Print
 Configuration28_Name1=ColumnNameFormat
 Configuration28_Item1=CaptionAsName
 Configuration28_Name2=General
-Configuration28_Item2=OpenExported=False|AddToProject=False|ReportBOMViolationsInMessages=False|ForceFit=False|NotFitted=False|Database=False|DatabasePriority=False|IncludePcbData=False|IncludeVaultData=False|IncludeCloudData=False|IncludeDocumentData=True|IncludeAlternatives=False|ShowExportOptions=True|TemplateFilename=|TemplateVaultGuid=|TemplateItemGuid=|TemplateRevisionGuid=|BatchMode=5|FormWidth=1782|FormHeight=710|SupplierProdQty=1|SupplierAutoQty=False|SupplierUseCachedPricing=False|SupplierCurrency=<none>|SolutionsPerItem=1|SuppliersPerSolution=1|ViewType=1|UseDirectApi=False|BomSetName=
+Configuration28_Item2=OpenExported=False|AddToProject=False|ReportBOMViolationsInMessages=False|ForceFit=False|NotFitted=False|Database=False|DatabasePriority=False|IncludePcbData=False|IncludeVaultData=False|IncludeCloudData=False|IncludeDocumentData=True|IncludeAlternatives=False|ShowExportOptions=True|TemplateFilename=|TemplateVaultGuid=|TemplateItemGuid=|TemplateRevisionGuid=|BatchMode=5|FormWidth=1782|FormHeight=710|SupplierProdQty=1|SupplierAutoQty=False|SupplierUseCachedPricing=False|SupplierCurrency=<none>|SolutionsPerItem=1|SuppliersPerSolution=1|ViewType=1|BomSetName=
 Configuration28_Name3=GroupOrder
 Configuration28_Item3=Part Number=True
 Configuration28_Name4=OutputConfigurationParameter1
@@ -689,7 +689,7 @@ Configuration28_Item7=Quantity=50|Designator=235|Value=115|Part Number=139|Footp
 [PublishSettings]
 OutputFilePath2=C:\Users\Volodymyr\OneDrive\Melttools\Prj_1_Laser_Driver\PCB_Laser_Driver\CameraLaserDriver_EthernetPCB_r0\Project Outputs for CameraEth_r0\CameraEth_r0_2024-08-19.PDF
 ReleaseManaged2=1
-OutputBasePath2=Project Outputs for TD25-CC1-PCBA.001_rev4
+OutputBasePath2=Project Outputs for CNC_rev1
 OutputPathMedia2=
 OutputPathMediaValue2=
 OutputPathOutputer2=[Output Type]
@@ -714,12 +714,12 @@ ShowComponentParameters2=1
 GlobalBookmarks2=0
 PDFACompliance2=Disabled
 PDFVersion2=Default
-OutputFilePath3=C:\Users\Volodymyr\OneDrive\Melttools\Prj_18_CameraController\PCB1_main_rev3\Project Outputs for TD25-CC1-PCBA.001_rev3\
+OutputFilePath3=C:\Users\USER1\OneDrive\Melttools\Prj_36_CNC_Timer\hardware\Project Outputs for CNC_rev1\
 ReleaseManaged3=1
-OutputBasePath3=Project Outputs for TD25-CC1-PCBA.001_rev4
+OutputBasePath3=Project Outputs for CNC_rev1
 OutputPathMedia3=
 OutputPathMediaValue3=
-OutputPathOutputer3=
+OutputPathOutputer3=[Output Type]
 OutputPathOutputerPrefix3=
 OutputPathOutputerValue3=
 OutputFileName3=
@@ -729,7 +729,7 @@ OutputFileNameSpecial3=
 OpenOutput3=0
 OutputFilePath4=D:\MY_FILES\Gdrive\ODESK\00_BigBoard\AltiumPcb\Project Outputs for BigBoard\BigBoard.wmv.mp4
 ReleaseManaged4=1
-OutputBasePath4=Project Outputs for TD25-CC1-PCBA.001_rev4
+OutputBasePath4=Project Outputs for CNC_rev1
 OutputPathMedia4=
 OutputPathMediaValue4=
 OutputPathOutputer4=[Output Type]
@@ -766,7 +766,7 @@ WmvVideoCodecName4=Windows Media Video V7
 WmvQuality4=80
 OutputFilePath6=C:\Users\Volodymyr\OneDrive\Melttools\Prj_18_CameraController\PCB1_main_rev3\Project Outputs for TD25-CC1-PCBA.001_rev3\GERBER\
 ReleaseManaged6=1
-OutputBasePath6=Project Outputs for TD25-CC1-PCBA.001_rev4
+OutputBasePath6=Project Outputs for CNC_rev1
 OutputPathMedia6=[Media Name]
 OutputPathMediaValue6=
 OutputPathOutputer6=[Output Type]
@@ -806,7 +806,7 @@ PDFACompliance7=Disabled
 PDFVersion7=Default
 OutputFilePath8=C:\Users\Volodymyr\OneDrive\Melttools\Prj_18_CameraController_TD25\PCB1_main_rev4\Project Outputs for TD25-CC1-PCBA.001_rev4\
 ReleaseManaged8=1
-OutputBasePath8=Project Outputs for TD25-CC1-PCBA.001_rev4
+OutputBasePath8=Project Outputs for CNC_rev1
 OutputPathMedia8=
 OutputPathMediaValue8=
 OutputPathOutputer8=[Output Type]
@@ -848,7 +848,7 @@ PDFVersion9=Default
 [GeneratedFilesSettings]
 RelativeOutputPath2=C:\Users\Volodymyr\OneDrive\Melttools\Prj_1_Laser_Driver\PCB_Laser_Driver\CameraLaserDriver_EthernetPCB_r0\Project Outputs for CameraEth_r0\CameraEth_r0_2024-08-19.PDF
 OpenOutputs2=0
-RelativeOutputPath3=C:\Users\Volodymyr\OneDrive\Melttools\Prj_18_CameraController\PCB1_main_rev3\Project Outputs for TD25-CC1-PCBA.001_rev3\
+RelativeOutputPath3=C:\Users\USER1\OneDrive\Melttools\Prj_36_CNC_Timer\hardware\Project Outputs for CNC_rev1\
 OpenOutputs3=0
 AddToProject3=1
 TimestampFolder3=0

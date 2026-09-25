@@ -37,6 +37,23 @@ static void Cycle_Enter(cyc_state_t state)
 }
 
 
+/**
+  * @brief  Take new timings and let both relays go: the common opening of
+  *         either kind of (re)start, before its dead time.
+  */
+static void Cycle_Arm(uint32_t run_ms, uint32_t pause_ms)
+{
+  s_run_ms   = run_ms;
+  s_pause_ms = pause_ms;
+
+  g_cyc.starts++;
+  g_cyc.run_ms   = run_ms;
+  g_cyc.pause_ms = pause_ms;
+
+  Relay_AllOff();
+}
+
+
 /* Exported functions --------------------------------------------------------*/
 
 void Cycle_Init(void)
@@ -45,6 +62,7 @@ void Cycle_Init(void)
   s_pause_ms = 0u;
 
   g_cyc.starts   = 0u;
+  g_cyc.stops    = 0u;
   g_cyc.rounds   = 0u;
   g_cyc.run_ms   = 0u;
   g_cyc.pause_ms = 0u;
@@ -57,22 +75,33 @@ void Cycle_Init(void)
 
 void Cycle_Start(uint32_t run_ms, uint32_t pause_ms)
 {
-  s_run_ms   = run_ms;
-  s_pause_ms = pause_ms;
-
-  g_cyc.starts++;
-  g_cyc.run_ms   = run_ms;
-  g_cyc.pause_ms = pause_ms;
-
-  Relay_AllOff();
+  Cycle_Arm(run_ms, pause_ms);
   Cycle_Enter(CYC_SETTLE);
+}
+
+
+void Cycle_StartWithStop(uint32_t run_ms, uint32_t pause_ms)
+{
+  Cycle_Arm(run_ms, pause_ms);
+  Cycle_Enter(CYC_SETTLE_STOP);
 }
 
 
 void Cycle_Stop(void)
 {
+  /* Idle: nothing to stop. Already stopping: let the last STOP play out
+     rather than press it twice. */
+  if ((s_state == CYC_IDLE) || (s_state == CYC_END_SETTLE) || (s_state == CYC_END_STOP))
+  {
+    return;
+  }
+
+  g_cyc.stops++;
+
+  /* Whatever is pressed is let go first; the last STOP follows after the
+     dead time, so the machine never sees START and STOP together. */
   Relay_AllOff();
-  Cycle_Enter(CYC_IDLE);
+  Cycle_Enter(CYC_END_SETTLE);
 }
 
 
@@ -108,6 +137,17 @@ void Cycle_Task(void)
       {
         Relay_On(RELAY_START);
         Cycle_Enter(CYC_START_PULSE);
+      }
+      break;
+
+
+    case CYC_SETTLE_STOP:
+
+      /* Into the loop at its STOP: the pause follows, then the first START. */
+      if (elapsed >= CYC_SETTLE_MS)
+      {
+        Relay_On(RELAY_STOP);
+        Cycle_Enter(CYC_STOP_PULSE);
       }
       break;
 
@@ -151,6 +191,26 @@ void Cycle_Task(void)
         /* Both relays have been off for the whole pause: no SETTLE needed. */
         Relay_On(RELAY_START);
         Cycle_Enter(CYC_START_PULSE);
+      }
+      break;
+
+
+    case CYC_END_SETTLE:
+
+      if (elapsed >= CYC_SETTLE_MS)
+      {
+        Relay_On(RELAY_STOP);
+        Cycle_Enter(CYC_END_STOP);
+      }
+      break;
+
+
+    case CYC_END_STOP:
+
+      if (elapsed >= CYC_RELAY_PULSE_MS)
+      {
+        Relay_Off(RELAY_STOP);
+        Cycle_Enter(CYC_IDLE);
       }
       break;
 

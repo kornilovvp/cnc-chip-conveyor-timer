@@ -259,82 +259,6 @@ ParamVariationCount=0
 DocumentPath=Project Outputs for CNC_rev1\ExportSTEP\CNC_rev1.step
 DItemRevisionGUID=
 
-[GeneratedDocument2]
-DocumentPath=Project Outputs for CNC_rev1\Design Rule Check - PCB.html
-DItemRevisionGUID=
-
-[GeneratedDocument3]
-DocumentPath=Project Outputs for CNC_rev1\GERBER\NC Drill\PCB.DRR
-DItemRevisionGUID=
-
-[GeneratedDocument4]
-DocumentPath=Project Outputs for CNC_rev1\GERBER\Gerber\PCB.EXTREP
-DItemRevisionGUID=
-
-[GeneratedDocument5]
-DocumentPath=Project Outputs for CNC_rev1\GERBER\Gerber\PCB.GBL
-DItemRevisionGUID=
-
-[GeneratedDocument6]
-DocumentPath=Project Outputs for CNC_rev1\GERBER\Gerber\PCB.GBO
-DItemRevisionGUID=
-
-[GeneratedDocument7]
-DocumentPath=Project Outputs for CNC_rev1\GERBER\Gerber\PCB.GBP
-DItemRevisionGUID=
-
-[GeneratedDocument8]
-DocumentPath=Project Outputs for CNC_rev1\GERBER\Gerber\PCB.GBS
-DItemRevisionGUID=
-
-[GeneratedDocument9]
-DocumentPath=Project Outputs for CNC_rev1\GERBER\Gerber\PCB.GD1
-DItemRevisionGUID=
-
-[GeneratedDocument10]
-DocumentPath=Project Outputs for CNC_rev1\GERBER\Gerber\PCB.GG1
-DItemRevisionGUID=
-
-[GeneratedDocument11]
-DocumentPath=Project Outputs for CNC_rev1\GERBER\Gerber\PCB.GKO
-DItemRevisionGUID=
-
-[GeneratedDocument12]
-DocumentPath=Project Outputs for CNC_rev1\GERBER\Gerber\PCB.GTL
-DItemRevisionGUID=
-
-[GeneratedDocument13]
-DocumentPath=Project Outputs for CNC_rev1\GERBER\Gerber\PCB.GTO
-DItemRevisionGUID=
-
-[GeneratedDocument14]
-DocumentPath=Project Outputs for CNC_rev1\GERBER\Gerber\PCB.GTP
-DItemRevisionGUID=
-
-[GeneratedDocument15]
-DocumentPath=Project Outputs for CNC_rev1\GERBER\Gerber\PCB.GTS
-DItemRevisionGUID=
-
-[GeneratedDocument16]
-DocumentPath=Project Outputs for CNC_rev1\GERBER\NC Drill\PCB.LDP
-DItemRevisionGUID=
-
-[GeneratedDocument17]
-DocumentPath=Project Outputs for CNC_rev1\GERBER\Gerber\PCB.REP
-DItemRevisionGUID=
-
-[GeneratedDocument18]
-DocumentPath=Project Outputs for CNC_rev1\GERBER\Gerber\PCB.RUL
-DItemRevisionGUID=
-
-[GeneratedDocument19]
-DocumentPath=Project Outputs for CNC_rev1\GERBER\NC Drill\PCB.TXT
-DItemRevisionGUID=
-
-[GeneratedDocument20]
-DocumentPath=Project Outputs for CNC_rev1\GERBER\Pick Place\Pick Place for PCB(jlcpcb).csv
-DItemRevisionGUID=
-
 [Parameter1]
 Name=Rev
 Value=1
@@ -845,36 +769,6 @@ OutputName12=Web Review Data
 OutputDocumentPath12=
 OutputVariantName12=
 OutputDefault12=0
-OutputType13=Ansoft Neutral
-OutputName13=Ansoft Neutral (AutoPCB)
-OutputDocumentPath13=
-OutputVariantName13=
-OutputDefault13=0
-OutputType14=HyperLynx
-OutputName14=HyperLynx (AutoPCB)
-OutputDocumentPath14=
-OutputVariantName14=
-OutputDefault14=0
-OutputType15=MathWorks
-OutputName15=MathWorks (AutoPCB)
-OutputDocumentPath15=
-OutputVariantName15=
-OutputDefault15=0
-OutputType16=Orcad v7 Capture Design
-OutputName16=Orcad v7 Capture Design (AutoSCH)
-OutputDocumentPath16=
-OutputVariantName16=
-OutputDefault16=0
-OutputType17=P-CAD ASCII
-OutputName17=P-CAD ASCII (AutoPCB)
-OutputDocumentPath17=
-OutputVariantName17=
-OutputDefault17=0
-OutputType18=P-CAD V16 Schematic Design
-OutputName18=P-CAD V16 Schematic Design (AutoSCH)
-OutputDocumentPath18=
-OutputVariantName18=
-OutputDefault18=0
 
 [OutputGroup10]
 Name=PostProcess Outputs

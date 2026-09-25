@@ -47,13 +47,14 @@ When the timer is switched off, the START and STOP buttons on the panel work exa
 The command is accepted <b>0.7 s after the last click</b> (a beep confirms it).</p>
 <table>
   <tr><th class="c" style="width:26mm">Clicks</th><th>Action</th></tr>
-  <tr><td class="c dots">●</td><td><b>Switch ON</b> in the last used program / <b>switch OFF</b></td></tr>
+  <tr><td class="c dots">●</td><td><b>Switch ON</b> in the last used program / <b>switch OFF</b> (the conveyor stops)</td></tr>
   <tr><td class="c dots">●●</td><td>Program 1</td></tr>
   <tr><td class="c dots">●●●</td><td>Program 2</td></tr>
   <tr><td class="c dots">●●●●</td><td>Program 3</td></tr>
 </table>
-<p>Choosing a program starts the conveyor cycle at once and is remembered after power-off.
-The timer always powers up switched <b>OFF</b>.</p>
+<p>Choosing a program takes effect at once, timer ON or OFF: the conveyor stops, rests for the
+program's pause, then the cycle runs. The choice is remembered after power-off. One click switches
+on with the conveyor starting straight away. The timer always powers up switched <b>OFF</b>.</p>
 
 <h2>Programs</h2>
 <table>
@@ -66,7 +67,7 @@ The timer always powers up switched <b>OFF</b>.</p>
 Start with program 1; if the chips still come out wet, go to 2 or 3.</p>
 
 <div class="note"><b>Automatic switch-off.</b> After <b>4 hours</b> of continuous running the timer
-switches itself off and sounds a 15&nbsp;s signal. One click starts it again.</div>
+stops the conveyor, switches itself off and sounds a 15&nbsp;s signal. One click starts it again.</div>
 
 </div>
 <div>
@@ -91,6 +92,7 @@ switches itself off and sounds a 15&nbsp;s signal. One click starts it again.</d
 </table>
 
 <h2>Good to know</h2>
+<p>· Switching off always ends with a STOP press, so the conveyor stops even if it was running at that moment.</p>
 <p>· The two relays can never press START and STOP at the same time; every start begins with both released.</p>
 <p>· Clicks during the power-on beep are ignored — wait for the lamp to go dark, then click.</p>
 <p>· Too many clicks? Anything over four counts as four (program 3).</p>

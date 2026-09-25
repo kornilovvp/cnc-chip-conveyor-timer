@@ -74,31 +74,37 @@ static void App_ShowOff(void)
 /**
   * @brief  HL1 for the current state. Cheap and idempotent, so it simply runs
   *         every loop. During start-up the LED stays lit as DebugLed_Init()
-  *         left it.
+  *         left it. From then on it follows the relays: a pattern per phase
+  *         while the cycle plays, the last STOP press on the way to OFF
+  *         included, and the OFF flash once the cycle is idle.
   */
 static void App_ShowDebugLed(void)
 {
-  if (s_state == APP_OFF)
+  if ((s_state != APP_OFF) && (s_state != APP_RUN))
   {
-    DebugLed_Blink(APP_HL1_OFF_ON_MS, APP_HL1_OFF_OFF_MS);
+    return;
   }
-  else if (s_state == APP_RUN)
+
+  switch (Cycle_GetState())
   {
-    switch (Cycle_GetState())
-    {
-      case CYC_START_PULSE:
-        DebugLed_Blink(APP_HL1_START_ON_MS, APP_HL1_START_OFF_MS);
-        break;
+    case CYC_IDLE:
+      /* Only ever seen in OFF: a running cycle is never idle. */
+      DebugLed_Blink(APP_HL1_OFF_ON_MS, APP_HL1_OFF_OFF_MS);
+      break;
 
-      case CYC_STOP_PULSE:
-        DebugLed_Blink(APP_HL1_STOP_ON_MS, APP_HL1_STOP_OFF_MS);
-        break;
+    case CYC_START_PULSE:
+      DebugLed_Blink(APP_HL1_START_ON_MS, APP_HL1_START_OFF_MS);
+      break;
 
-      default:
-        /* SETTLE, RUN, PAUSE: both relays released. */
-        DebugLed_Blink(APP_HL1_BETWEEN_ON_MS, APP_HL1_BETWEEN_OFF_MS);
-        break;
-    }
+    case CYC_STOP_PULSE:
+    case CYC_END_STOP:
+      DebugLed_Blink(APP_HL1_STOP_ON_MS, APP_HL1_STOP_OFF_MS);
+      break;
+
+    default:
+      /* SETTLE, SETTLE_STOP, RUN, PAUSE, END_SETTLE: both relays released. */
+      DebugLed_Blink(APP_HL1_BETWEEN_ON_MS, APP_HL1_BETWEEN_OFF_MS);
+      break;
   }
 }
 
@@ -128,9 +134,11 @@ static uint8_t App_PollFault(void)
   * @brief  Start the cycle in the mode in force. From OFF this switches the
   *         device on and starts the 4 h clock; from RUN it only restarts the
   *         cycle and the clock keeps running.
-  * @param  announce  1 = the usual 2 s start beep, 0 = keep the buzzer as is
+  * @param  with_stop  1 = STOP first, then the mode's pause, then the cycle
+  *                    (a mode taken up); 0 = START at once (switching on)
+  * @param  announce   1 = the usual 2 s start beep, 0 = keep the buzzer as is
   */
-static void App_Start(uint8_t announce)
+static void App_Start(uint8_t with_stop, uint8_t announce)
 {
   if (s_state == APP_RUN)
   {
@@ -146,7 +154,15 @@ static void App_Start(uint8_t announce)
     App_Enter(APP_RUN);
   }
 
-  Cycle_Start(k_mode[s_mode].run_ms, k_mode[s_mode].pause_ms);
+  if (with_stop != 0u)
+  {
+    Cycle_StartWithStop(k_mode[s_mode].run_ms, k_mode[s_mode].pause_ms);
+  }
+  else
+  {
+    Cycle_Start(k_mode[s_mode].run_ms, k_mode[s_mode].pause_ms);
+  }
+
   Indicator_Repeat(s_mode, APP_MODE_BURST_GAP_MS);
 
   if (announce != 0u)
@@ -157,8 +173,10 @@ static void App_Start(uint8_t announce)
 
 
 /**
-  * @brief  Switch off: relays released, lamp to its OFF face. Silent -- the
-  *         caller decides whether this deserves a sound.
+  * @brief  Switch off. The cycle presses STOP one last time before the
+  *         relays rest (see cycle.h), so the machine really stops; the lamp
+  *         takes its OFF face at once. Silent -- the caller decides whether
+  *         this deserves a sound.
   */
 static void App_Off(void)
 {
@@ -172,7 +190,8 @@ static void App_Off(void)
 /**
   * @brief  Dispatch a click series.
   *         1 click toggles OFF / RUN. 2..4 clicks select mode 1..3, store it
-  *         and (re)start the cycle -- from OFF as well as from RUN.
+  *         and take it up -- from OFF as well as from RUN, the same mode
+  *         included: STOP, the mode's pause, then the cycle.
   */
 static void App_OnClicks(uint8_t clicks)
 {
@@ -192,7 +211,7 @@ static void App_OnClicks(uint8_t clicks)
     }
     else
     {
-      App_Start(1u);
+      App_Start(0u, 1u);
     }
 
     return;
@@ -219,7 +238,7 @@ static void App_OnClicks(uint8_t clicks)
     new_fault = App_PollFault();
   }
 
-  App_Start((new_fault != 0u) ? 0u : 1u);
+  App_Start(1u, (new_fault != 0u) ? 0u : 1u);
 }
 
 

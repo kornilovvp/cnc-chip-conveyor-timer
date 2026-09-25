@@ -7,20 +7,27 @@
   * how to drive their piece of hardware.
   *
   *   power-on   HL1 lit -> 1 s quiet -> beep 2 s + 3 lamp blinks -> OFF
-  *   OFF        relays off, lamp dark, button listening
+  *   OFF        relays at rest, lamp dark, button listening
   *   RUN        relay cycle in the selected mode, lamp repeats the mode number
   *              with 3 s of dark between bursts, 4 h auto-off clock running
   *
-  *   1 click    OFF -> RUN in the stored mode  /  RUN -> OFF
-  *   2..4       select mode 1..3, store it, (re)start the cycle
+  *   1 click    OFF -> RUN in the stored mode, START at once  /  RUN -> OFF
+  *   2..4       select mode 1..3, store it, take it up: STOP, the mode's
+  *              pause, then the cycle -- from OFF as well as on the run
   *   4 h        RUN -> OFF, 15 s alarm beep
+  *
+  * Going OFF, by hand or by the clock, presses STOP once more before the
+  * relays rest (see cycle.h): the machine holds itself running after a
+  * START, and switching the timer off must stop the conveyor, not abandon
+  * it. The lamp goes dark at once; the press takes 0.6 s.
   *
   * Every start of the cycle is announced with a 2 s beep, switching off by
   * hand with a 0.5 s one.
   *
   * The on-board LED HL1 mirrors the state for whoever has the lid open: lit
-  * during start-up, a flash every 3 s in OFF, and in RUN a pattern per cycle
-  * phase (see the APP_HL1_* constants).
+  * during start-up, a flash every 3 s in OFF, and while the relays play a
+  * pattern per cycle phase (see the APP_HL1_* constants), the last STOP
+  * press on the way to OFF included.
   *
   * Fault. When the settings store gives up (see settings.h) the device keeps
   * working, with the mode held in RAM only, and says so: SOS instead of the

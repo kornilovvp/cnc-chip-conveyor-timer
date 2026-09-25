@@ -29,12 +29,17 @@ one relay for START and one for STOP.
 ```mermaid
 stateDiagram-v2
     direction LR
-    [*] --> SETTLE : switched on
+    [*] --> SETTLE : 1 click, switched on
     SETTLE --> START_PULSE : 100 ms, both relays off
     START_PULSE --> RUN : START held 500 ms
     RUN --> STOP_PULSE : T1 elapsed
     STOP_PULSE --> PAUSE : STOP held 500 ms
     PAUSE --> START_PULSE : T2 elapsed
+    [*] --> SETTLE_STOP : 2..4 clicks, mode selected
+    SETTLE_STOP --> STOP_PULSE : 100 ms, both relays off
+    RUN --> LAST_STOP : switched off
+    PAUSE --> LAST_STOP : switched off
+    LAST_STOP --> [*] : 100 ms both off, then STOP held 500 ms
 ```
 
 | Mode | T1 — conveyor runs | T2 — conveyor rests |
@@ -47,13 +52,20 @@ The two buttons are never pressed at the same time. The rule is enforced in
 the relay driver itself — pressing one lets go of the other first — and every
 start of the cycle begins with 100 ms of neither button pressed.
 
+Switching off is not a plain release of the relays. The machine holds itself
+running once START has been pressed, so a timer that simply let go mid-run
+would leave the conveyor going. Instead, from whatever phase the cycle is in,
+the timer releases both relays for 100 ms, presses STOP once more for 500 ms,
+and only then rests. A pause is no exception: STOP on a conveyor that already
+stands still does nothing.
+
 Both relays rest with their coils off, so the operator's panel buttons work as
 if the timer were not there. To press a button the timer energises a relay for
 500 ms: START through a normally-open contact across the START button, STOP
 through a normally-closed contact in series with the machine's STOP circuit.
 
-After **4 hours** of continuous running the timer switches itself off and
-sounds a 15 s alarm.
+After **4 hours** of continuous running the timer presses STOP, switches
+itself off and sounds a 15 s alarm.
 
 ## Operating it
 
@@ -62,14 +74,16 @@ the series ends when the button stays released for 0.7 s.
 
 | Clicks | Action |
 |:---:|---|
-| 1 | Switch on in the stored mode / switch off |
+| 1 | Switch on in the stored mode / switch off (the conveyor is stopped) |
 | 2 | Mode 1 |
 | 3 | Mode 2 |
 | 4 | Mode 3 |
 
-Selecting a mode stores it in flash and starts (or restarts) the cycle at once.
-More than four clicks count as four. The stored mode survives a power cycle;
-the device always powers up switched off.
+Selecting a mode stores it in flash and takes it up at once, from OFF as well
+as on the run: STOP is pressed, the conveyor rests for the mode's T2, and the
+cycle goes on from there with START. One click switches on with START straight
+away. More than four clicks count as four. The stored mode survives a power
+cycle; the device always powers up switched off.
 
 **Sounds**
 
